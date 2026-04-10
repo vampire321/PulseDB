@@ -73,9 +73,14 @@ if errors.Is(err, pgx.ErrNoRows) {
 }
 
 //pattern -3 SELECT multiple row
-rows, err := pool.Query(ctx, `SELECT name, url, interval_s FROM monitors`) //it sends sql 
+rows, err := pool.Query(ctx, `SELECT name, url, interval_s FROM monitors`) //it sends sql to database and db returns multiple rows
 if err != nil{
-	panic(err)
+	panic(err) //stop progeam if querry fails
 }
-defer rows.Close()
+defer rows.Close() //close rows when done(can  cause memory leak if not closed)
+for rows.Next(){
+	var id , name , url string
+	rows.Scan(&id,&name,&url) //scan each row into variables
+	fmt.Println("monitor:", id, name, url)
+}
 }
