@@ -66,14 +66,14 @@ err = pool.QueryRow(ctx,
     id,
 ).Scan(&name, &url, &intervalS)
 
-if errors.Is(err, pgx.ErrNoRows) {
+if errors.Is(err, pgx.ErrNoRows) { //"no rows found" is often a valid business case, not a system failure.
     fmt.Println("not found")
 }else{
 	fmt.Println("fetched monitor:", name, url, intervalS)
 }
 
 //pattern -3 SELECT multiple row
-rows, err := pool.Query(ctx, `SELECT name, url, interval_s FROM monitors`) //it sends sql to database and db returns multiple rows
+rows, err := pool.Query(ctx, `SELECT name, url, interval_s FROM monitors`) //it sends sql to database and db returns multiple rows like ROws cursor  that must iterate through using loops
 if err != nil{
 	panic(err) //stop progeam if querry fails
 }
