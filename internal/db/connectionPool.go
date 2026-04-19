@@ -26,7 +26,7 @@ func main(){
 		fmt.Println("failed to ping database", err)
 		os.Exit(1)
 	}
-	fmt.Println("connected to POstgreSQL")
+	fmt.Println("connected to PostgreSQL")
 
 	//QuerryRow for single row
 	var version string

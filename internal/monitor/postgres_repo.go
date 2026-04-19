@@ -1,8 +1,12 @@
+//THIS REPO IS USED TO FETCH REQUIRED RECORD FROM A POSTGRESQL DATBASE. IT SPECIFICALLY TARGETS MONITORS THAT ARE DUE FOR CHECKING BASED ON THEIR LAST CHECKED TIME AND INTERVAL.
 package postgres
 
 import (
 	"context"
 )
+type PostgresRepo struct {
+    pool *pgxpool.Pool
+}
 //scheduler needs to find monitors that are due for checking
 func (r *PostgresRepo) ListDueMonitors(ctx context.Context) ([]*Monitor, error) {
     rows, err := r.pool.Query(ctx,
