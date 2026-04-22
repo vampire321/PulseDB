@@ -2,7 +2,7 @@ package metrics
 
 import (
 	"github.com/prometheus/client_golang/prometheus"
-	"github.com/prometheus/client_golang/promaouto"
+	"github.com/prometheus/client_golang/prometheus/promauto"
 )
 
 var(
@@ -21,12 +21,12 @@ var(
 			Help : "HTTP request duration in seconds",
 			Buckets: prometheus.DefBuckets,
 		},
-		[]string{"method","path"}
+		[]string{"method","path"},
 	)
 
 //Business metrics
 
-	ActiveMonitors = promauto.NewGuage( //to measure the Capacity/load
+	ActiveMonitors = promauto.NewGauge( //to measure the Capacity/load
 		prometheus.GaugeOpts{
 			Name: "pulsedb_active_monitors",
 			Help:"Number of active monitors",

@@ -2,7 +2,7 @@ package monitor
 
 import "time"
 
-type status string
+type Status string
 
 const(
 	StatusActive Status = "active"
