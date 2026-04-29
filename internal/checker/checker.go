@@ -131,3 +131,4 @@ func doProbe(ctx context.Context, url string) (int, string) {
 	defer resp.Body.Close()
 	return resp.StatusCode, ""
 }
+
